@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: developersdays-front-deployment
+  labels:
+    component: developersdays-front
+spec:
+  selector:
+    matchLabels:
+      component: developersdays-front
+  template:
+    metadata:
+      labels:
+        component: developersdays-front
+        version: "1.3"
+    spec:
+      containers:
+      - name: developersdays-front
+        image: developersdayseuwacr.azurecr.io/developersdays/front
+        ports:
+        - containerPort: 80

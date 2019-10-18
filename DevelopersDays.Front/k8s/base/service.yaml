@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: developersdays-front-service
+spec:
+  selector:
+    component: developersdays-front
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80

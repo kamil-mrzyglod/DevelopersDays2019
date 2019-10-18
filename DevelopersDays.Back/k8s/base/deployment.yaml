@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: developersdays-back-deployment
+  labels:
+    component: developersdays-back
+spec:
+  selector:
+    matchLabels:
+      component: developersdays-back
+  template:
+    metadata:
+      labels:
+        component: developersdays-back
+    spec:
+      containers:
+      - name: developersdays-back
+        image: developersdayseuwacr.azurecr.io/developersdays/back
+        ports:
+        - containerPort: 80
