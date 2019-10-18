@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: developersdays-back
-        image: developersdayseuwacr.azurecr.io/developersdays/back
+        image: developersdays2019euwacr.azurecr.io/developersdays/back
         ports:
         - containerPort: 80
