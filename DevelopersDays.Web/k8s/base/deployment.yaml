@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: developersdays-web-deployment
+  labels:
+    component: developersdays-web
+spec:
+  selector:
+    matchLabels:
+      component: developersdays-web
+  template:
+    metadata:
+      labels:
+        component: developersdays-web
+    spec:
+      containers:
+      - name: developersdays-web
+        image: developersdays2019euwacr.azurecr.io/developersdays/web
+        ports:
+        - containerPort: 80

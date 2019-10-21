@@ -26,6 +26,7 @@ docker stop %2
 echo Starting Telepresence
 docker run^
  --net=host^
+ --rm^
  -it^
  -v %kubemount%:/kube^
  -v /:/host^
