@@ -12,14 +12,17 @@
             "sourceFileMap": {
                 "/src": "${workspaceFolder}"
             },
+            "justMyCode": false,
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "kubectl",
+                "pipeProgram": "bash",
                 "pipeArgs": [
-                    "exec", "-i", "developersdays-front-deployment-5647889c7b-2c85t", "--"
+                    "../kubectl-selector-exec.sh",
+                    "--selector", "component=developersdays-front",
+                    "--namespace", "kubectl-demo"
                 ],
                 "debuggerPath": "/vsdbg/vsdbg",
-                "quoteArgs": false,
+                "quoteArgs": true,
             }
         },
         {
