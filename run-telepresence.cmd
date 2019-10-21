@@ -13,7 +13,7 @@ if [%2]==[] (
 if "%3"=="local" (
     set kubemount=/etc/kubernetes
 ) ELSE (
-    set kubemount="c:\%HomePath%\.kube"
+    set kubemount="C:\%HomePath%\.kube"
 )
 
 CALL :to_linux_path %~dp0,unicornlinuxpath
@@ -37,12 +37,12 @@ docker run^
  --swap-deployment %2^
  --docker-run^
     --name %2^
+    --rm^
     -v "%unicornlinuxpath%:/src"^
     -v "%usernugetlinuxpath%:/root/.nuget/fallbackpackages"^
     -v "%systemnugetlinuxpath%:/root/.nuget/fallbackpackages2"^
     -v /home/vsdbg:/vsdbg^
     -e ASPNETCORE_ENVIRONMENT=Development^
-    --rm^
     -p 5002:80^
     --entrypoint bash^
     mcr.microsoft.com/dotnet/core/sdk:2.2^

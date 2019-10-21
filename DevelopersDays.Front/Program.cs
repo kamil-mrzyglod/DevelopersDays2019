@@ -21,11 +21,7 @@ namespace DevelopersDays.Front
         {
             Console.WriteLine("Hello Console World!");
             
-            var handler = new HttpClientHandler();
-
-            handler.ConfigureK8SCert(Path.Combine(ServiceAccountPath, CaKeyFileName));
-
-            var http = new HttpClient(handler);
+            var http = new HttpClient(new HttpClientHandler().AddCert(Path.Combine(ServiceAccountPath, CaKeyFileName)));
 
             var token = File.ReadAllText(Path.Combine(ServiceAccountPath, ServiceAccountTokenKeyFileName));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -47,7 +43,7 @@ namespace DevelopersDays.Front
 
     public static class Extensions
     {
-        public static void ConfigureK8SCert(this HttpClientHandler handler, string certPath)
+        public static HttpClientHandler AddCert(this HttpClientHandler handler, string certPath)
         {
             var ca = new X509Certificate2(certPath);
             handler.ServerCertificateCustomValidationCallback =
@@ -72,6 +68,8 @@ namespace DevelopersDays.Front
 
                     return false;
                 };
+
+            return handler;
         }
     }
 }
