@@ -23,6 +23,30 @@
             }
         },
         {
+            "name": "Telepresence: .NET Core Lunch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "sourceFileMap": {
+                "/src": "${workspaceFolder}"
+            },
+            "cwd": "/src/DevelopersDays.Front/bin/Debug/netcoreapp2.2",
+            "program": "dotnet",
+            "args": [
+                "--additionalprobingpath", "/root/.nuget/fallbackpackages/", 
+                "--additionalprobingpath", "/root/.nuget/fallbackpackages2/", 
+                "DevelopersDays.Front.dll"],
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "docker",
+                "pipeArgs": [
+                    "exec", "-i", "developersdays-front-deployment"
+                ],
+                "debuggerPath": "/vsdbg/vsdbg",
+                "quoteArgs": false,
+            }
+        },
+        {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
