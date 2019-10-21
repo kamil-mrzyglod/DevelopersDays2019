@@ -20,12 +20,12 @@ namespace DevelopersDays.Front
             {
                 while (true)
                 {
-                    var response = await http.GetAsync("http://10.0.145.163");
-                    var result = await response.Content.ReadAsStringAsync();
+                    var response = await http.GetAsync("http://developersdays-back-service");
+                    var result = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "FAIL";
 
                     Console.WriteLine(result);
 
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1000);
                 }
             }
         }
