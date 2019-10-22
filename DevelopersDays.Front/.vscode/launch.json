@@ -4,69 +4,97 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
-        {
-            "name": "K8S: .NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickRemoteProcess}",
-            "sourceFileMap": {
-                "/src": "${workspaceFolder}"
-            },
-            "justMyCode": false,
-            "pipeTransport": {
-                "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "bash",
-                "pipeArgs": [
-                    "../kubectl-selector-exec.sh",
-                    "--selector", "component=developersdays-front",
-                    "--namespace", "kubectl-demo"
-                ],
-                "debuggerPath": "/vsdbg/vsdbg",
-                "quoteArgs": true,
-            }
+    {
+        "name": "K8S: .NET Core Attach",
+        "type": "coreclr",
+        "request": "attach",
+        "processId": "${command:pickRemoteProcess}",
+        "sourceFileMap": {
+            "/src": "${workspaceFolder}"
         },
-        {
-            "name": "Telepresence: .NET Core Lunch",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "sourceFileMap": {
-                "/src": "${workspaceFolder}"
-            },
-            "cwd": "/src/DevelopersDays.Front/bin/Debug/netcoreapp2.2",
-            "program": "dotnet",
-            "args": [
-                "--additionalprobingpath", "/root/.nuget/fallbackpackages/", 
-                "--additionalprobingpath", "/root/.nuget/fallbackpackages2/", 
-                "DevelopersDays.Front.dll"],
-            "pipeTransport": {
-                "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "docker",
-                "pipeArgs": [
-                    "exec", "-i", "developersdays-front-deployment"
-                ],
-                "debuggerPath": "/vsdbg/vsdbg",
-                "quoteArgs": false,
-            }
-        },
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/DevelopersDays.Front.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+        "justMyCode": false,
+        "pipeTransport": {
+            "pipeCwd": "${workspaceFolder}",
+            "pipeProgram": "bash",
+            "pipeArgs": [
+                "../kubectl-selector-exec.sh",
+                "--selector",
+                "component=developersdays-front",
+                "--namespace",
+                "kubectl-demo"
+            ],
+            "debuggerPath": "/vsdbg/vsdbg",
+            "quoteArgs": true
         }
-    ]
+    },
+    {
+        "name": "Telepresence: .NET Core Lunch",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "sourceFileMap": {
+            "/src": "${workspaceFolder}"
+        },
+        "cwd": "/src/DevelopersDays.Front/bin/Debug/netcoreapp2.2",
+        "program": "dotnet",
+        "args": [
+            "--additionalprobingpath",
+            "/root/.nuget/fallbackpackages/",
+            "--additionalprobingpath",
+            "/root/.nuget/fallbackpackages2/",
+            "DevelopersDays.Front.dll"
+        ],
+        "pipeTransport": {
+            "pipeCwd": "${workspaceFolder}",
+            "pipeProgram": "docker",
+            "pipeArgs": [
+                "exec",
+                "-i",
+                "developersdays-front-deployment"
+            ],
+            "debuggerPath": "/vsdbg/vsdbg",
+            "quoteArgs": false
+        }
+    },
+    {
+        "name": ".NET Core Launch (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/DevelopersDays.Front.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "console": "internalConsole",
+        "stopAtEntry": false
+    },
+    {
+        "name": ".NET Core Attach",
+        "type": "coreclr",
+        "request": "attach",
+        "processId": "${command:pickProcess}"
+    },
+    {
+        "name": ".NET Core Launch (AZDS)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "azds: prelaunch",
+        "pipeTransport": {
+            "pipeCwd": "${workspaceFolder}",
+            "pipeProgram": "azds",
+            "pipeArgs": [
+                "exec",
+                "--interactive",
+                "--on-exit-resume-up",
+                "--"
+            ],
+            "debuggerPath": "/vsdbg/vsdbg",
+            "quoteArgs": false
+        },
+        "cwd": "/src",
+        "program": "/src/bin/Debug/netcoreapp2.2/DevelopersDays.Front.dll",
+        "sourceFileMap": {
+            "/src": "${workspaceFolder}/."
+        }
+    }
+]
 }
