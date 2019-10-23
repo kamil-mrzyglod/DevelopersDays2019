@@ -32,9 +32,11 @@ namespace DevelopersDays.Front
                 var result = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "FAIL";
 
                 Console.WriteLine(result);
+                response.EnsureSuccessStatusCode();
 
                 var apiResponse = await http.GetAsync("https://kubernetes.default/api");
                 Console.WriteLine(await apiResponse.Content.ReadAsStringAsync());
+                response.EnsureSuccessStatusCode();
 
                 Thread.Sleep(1000);
             }
