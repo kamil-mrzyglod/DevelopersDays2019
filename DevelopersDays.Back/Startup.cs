@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ namespace DevelopersDays.Back
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                throw new Exception("It's completely broken :(");
             });
         }
     }

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: developersdays-back
-        image: developersdays2019euwacr.azurecr.io/developersdays/back
+        image: developersdays2019euwacr.azurecr.io/developersdays/back-broken
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

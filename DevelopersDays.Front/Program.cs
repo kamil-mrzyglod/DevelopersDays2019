@@ -38,7 +38,7 @@ namespace DevelopersDays.Front
                 Console.WriteLine(await apiResponse.Content.ReadAsStringAsync());
                 response.EnsureSuccessStatusCode();
 
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
             }
         }
     }
