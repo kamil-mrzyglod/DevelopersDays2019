@@ -41,19 +41,23 @@ namespace DevelopersDays.Web
             {
                 var clientFactory = context.RequestServices.GetRequiredService<IHttpClientFactory>();
                 var http = clientFactory.CreateClient("client");
-
+                HttpResponseMessage response;
+                
                 if (context.Request.Path.StartsWithSegments(new PathString("/kube")))
                 {
-                    var apiResponse = await http.GetAsync("https://kubernetes.default/api");
-                    var apiResult = await apiResponse.Content.ReadAsStringAsync();
-                    await context.Response.WriteAsync(apiResult);
+                    response = await http.GetAsync("https://kubernetes.default/api");
+                }
+                else if (context.Request.Path.StartsWithSegments(new PathString("/ip")))
+                {
+                    response = await http.GetAsync("https://api.ipify.org?format=json");
                 }
                 else
                 {
-                    var response = await http.GetAsync("http://developersdays-back-service");
-                    var result = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "FAIL";
-                    await context.Response.WriteAsync(result);
+                    response = await http.GetAsync("http://developersdays-back-service");
                 }
+
+                var result = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "FAIL";
+                await context.Response.WriteAsync(result);
             });
         }
     }

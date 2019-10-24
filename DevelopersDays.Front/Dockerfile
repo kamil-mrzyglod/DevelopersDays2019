@@ -3,6 +3,8 @@ FROM mcr.microsoft.com/dotnet/core/runtime:2.2 AS base
 RUN apt-get update && apt-get -y install unzip
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg	
 
+RUN apt-get update && apt-get -y install procps
+
 WORKDIR /app
 EXPOSE 80
 
