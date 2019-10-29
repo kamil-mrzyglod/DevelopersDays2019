@@ -23,4 +23,4 @@ done
 #echo "serching for pod in ${NAMESPACE:-default} namespace and with $SELECTOR"
 POD=`kubectl get pods -n ${NAMESPACE:-default} --selector=$SELECTOR -o jsonpath='{.items[0].metadata.name}'`;
 # echo "starting debugger on $POD";
-kubectl exec $POD -i -- $PARAMS;
+kubectl -n ${NAMESPACE:-default} exec $POD -i -- $PARAMS;
