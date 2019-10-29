@@ -1,23 +1,18 @@
 FROM ubuntu:18.04
-RUN apt-get update && \
-      apt-get -y install sudo
-RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
-
-RUN apt-get update && apt-get install -y curl && apt-get install -y gnupg net-tools
 
 RUN apt-get update && \
-	apt-get install \
-   -y apt-transport-https \
-    ca-certificates \
-    software-properties-common
+	apt-get install -y curl && \
+	apt-get install -y gnupg net-tools
 
-# Install docker
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
-		apt-key fingerprint 0EBFCD88 && \
-		add-apt-repository \
-			"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-			$(lsb_release -cs) \
-		stable"	&&	apt-get update && apt-get install -y docker-ce
+RUN apt-get update && \
+	apt-get install -y apt-transport-https ca-certificates software-properties-common
+
+# Install docker cli
+ENV DOCKERVERSION=19.03.4
+RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
+  && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 \
+                 -C /usr/local/bin docker/docker \
+  && rm docker-${DOCKERVERSION}.tgz
 
 # Install telepresence
 RUN curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.deb.sh | bash && apt install --no-install-recommends -y telepresence
