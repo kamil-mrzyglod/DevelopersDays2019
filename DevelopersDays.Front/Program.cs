@@ -28,7 +28,7 @@ namespace DevelopersDays.Front
 
             while (true)
             {
-                var response = await http.GetAsync("http://developersdays-back-service");
+                var response = await http.GetAsync("http://developersdaysback");
                 var result = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : "FAIL";
 
                 Console.WriteLine(result);

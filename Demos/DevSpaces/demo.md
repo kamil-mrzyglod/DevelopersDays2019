@@ -1,6 +1,12 @@
 # Azure Dev Spaces
+## Setting the context
+```
+kubectl config set-context $(kubectl config current-context) --namespace=default
+```
 ## Configure AKS
-``` az aks use-dev-spaces -n developersdays-euw-aks -g developersdays-euw-rg```
+``` 
+az aks use-dev-spaces -n developersdays-euw-aks -g developersdays-euw-rg
+```
 ## Namespaces with Azure Dev Spaces enabled
 ```
 kubectl get namespaces
