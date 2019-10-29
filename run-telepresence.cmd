@@ -32,7 +32,7 @@ docker run^
  -v /:/host^
  -v /tmp:/tmp^
  -v /var/run/docker.sock:/var/run/docker.sock^
- unicorndeveuwacr.azurecr.io/telepresence:0.102.1^
+ {{T9S_TAG}}^
  --docker-mount=/t9s^
  --namespace=%1^
  --swap-deployment %2^
