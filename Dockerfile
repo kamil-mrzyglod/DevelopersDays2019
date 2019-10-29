@@ -29,9 +29,5 @@ RUN echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/ap
 
 RUN apt-get update && apt-get -y install kubectl
 
-# Download vsdbg
-RUN apt-get update && apt-get -y install unzip
-RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg	
-
 COPY ./entrypoint.sh .
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]

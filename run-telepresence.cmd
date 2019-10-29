@@ -16,7 +16,8 @@ if "%3"=="local" (
     set kubemount="C:\%HomePath%\.kube"
 )
 
-CALL :to_linux_path %~dp0,unicornlinuxpath
+CALL :to_linux_path %~dp0,srclinuxpath
+CALL :to_linux_path C:\%HOMEPATH%\vsdbg\vs2017u5\,vsdbglinuxpath
 CALL :to_linux_path C:\%HOMEPATH%\.nuget\packages\,usernugetlinuxpath
 CALL :to_linux_path "C:\Program Files\dotnet\sdk\NuGetFallbackFolder",systemnugetlinuxpath
 
@@ -39,10 +40,10 @@ docker run^
  --docker-run^
     --name %2^
     --rm^
-    -v "%unicornlinuxpath%:/src"^
+    -v "%srclinuxpath%:/src"^
     -v "%usernugetlinuxpath%:/root/.nuget/fallbackpackages"^
     -v "%systemnugetlinuxpath%:/root/.nuget/fallbackpackages2"^
-    -v /home/vsdbg:/vsdbg^
+    -v "%vsdbglinuxpath%:/vsdbg"^
     -e ASPNETCORE_ENVIRONMENT=Development^
     -p 5002:80^
     --entrypoint bash^
