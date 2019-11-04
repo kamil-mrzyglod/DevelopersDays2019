@@ -10,12 +10,6 @@ if [%2]==[] (
     goto :error
 )
 
-if "%3"=="local" (
-    set kubemount=/etc/kubernetes
-) ELSE (
-    set kubemount="C:\%HomePath%\.kube"
-)
-
 CALL :to_linux_path %~dp0,srclinuxpath
 CALL :to_linux_path C:\%HOMEPATH%\vsdbg\vs2017u5\,vsdbglinuxpath
 CALL :to_linux_path C:\%HOMEPATH%\.nuget\packages\,usernugetlinuxpath
@@ -25,15 +19,15 @@ echo Stopping any old debug containers
 docker stop %2
 
 echo Starting Telepresence
+@echo on
 docker run^
  --net=host^
  --rm^
  -it^
- -v %kubemount%:/kube^
- -v /:/host^
+ -v "C:\%HomePath%\.kube:/root/.kube"^
  -v /tmp:/tmp^
  -v /var/run/docker.sock:/var/run/docker.sock^
- {{T9S_TAG}}^
+ %T9S_TAG%^
  --docker-mount=/t9s^
  --namespace=%1^
  --swap-deployment %2^
